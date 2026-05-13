@@ -59,6 +59,20 @@
       </div>
 
     </div>
+
+    <!-- 🚧 Marquee / Scrolling ticker banner -->
+    <div class="overflow-hidden bg-electric-blue/10 border-t border-electric-blue/20 py-1">
+      <div class="marquee-track flex whitespace-nowrap">
+        <span
+          v-for="n in 12"
+          :key="n"
+          class="text-electric-blue text-xs font-semibold tracking-widest uppercase mx-8"
+        >
+          🚧 Under Construction
+        </span>
+      </div>
+    </div>
+
   </nav>
 </template>
 
@@ -86,3 +100,14 @@ function handleTabClick(tab: { label: string; view: string }) {
   }
 }
 </script>
+
+<style scoped>
+.marquee-track {
+  animation: marquee 20s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+</style>
