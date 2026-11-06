@@ -91,7 +91,7 @@ export const education: EducationEntry[] = [
   },
   {
     institution: 'Prestige Business College',
-    qualification: 'Computer Administrations',
+    qualification: 'Computer Administration',
     period: '2021'
   },
   {
@@ -103,12 +103,12 @@ export const education: EducationEntry[] = [
 
 export const certifications: Certification[] = [
   {
-    name: 'ISTQB Foundation Level',
+    name: 'ISTQB Foundation Level Certification (V4.0)',
     provider: 'Udemy',
     date: 'June 2024'
   },
   {
-    name: 'Selenium Automation Testing',
+    name: 'Selenium Automation Testing Certification',
     provider: 'Udemy',
     date: '2023'
   }

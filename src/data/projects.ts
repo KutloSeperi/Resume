@@ -23,8 +23,8 @@ export const projects: Project[] = [
   {
     name: 'TechPrime Website',
     description:
-      'A responsive IT consulting website featuring custom animations, built using HTML, SCSS, JavaScript, and Node.js.',
+      'A responsive, user-focused website built using HTML, CSS, JavaScript, and Sass, with a backend server for email enquiries.',
     url: 'https://kutloseperi.github.io/Techprime_Website/',
-    tags: ['HTML', 'SCSS', 'JavaScript', 'Node.js']
+    tags: ['HTML', 'CSS', 'JavaScript', 'Sass']
   }
 ]

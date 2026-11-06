@@ -21,22 +21,22 @@
         <!-- Greeting -->
         <div class="chat chat-start">
           <div class="chat-bubble bg-navy border border-electric-blue/20 text-white text-sm">
-            Hi! I'm DevBot — Kutlo's assistant. What kind of project are you looking to build?
+            Hi! I'm DevBot — Kutlo's assistant. Ask me about his work, skills, projects, or services. I'm happy to chat, too!
           </div>
         </div>
 
         <!-- Conversation messages -->
-        <template v-for="(msg, index) in messages" :key="index">
+        <template v-for="msg in messages" :key="msg.timestamp.getTime()">
           <div :class="msg.role === 'user' ? 'chat chat-end' : 'chat chat-start'">
             <div
               :class="[
-                'chat-bubble text-sm',
+                'chat-bubble chat-markdown text-sm',
                 msg.role === 'user'
                   ? 'bg-electric-blue text-white'
                   : 'bg-navy border border-electric-blue/20 text-white'
               ]"
+              v-html="formatChatMessage(msg.content)"
             >
-              {{ msg.content }}
             </div>
           </div>
         </template>
@@ -81,6 +81,7 @@
 <script setup lang="ts">
 import { ref, watch, nextTick } from 'vue'
 import { useChatbot } from '../composables/useChatbot'
+import { formatChatMessage } from '../utils/formatChatMessage'
 
 const props = defineProps<{
   isOpen: boolean
@@ -123,3 +124,24 @@ async function handleSend() {
   await sendMessage(text)
 }
 </script>
+
+<style scoped>
+.chat-markdown :deep(p + p) {
+  margin-top: 0.6rem;
+}
+
+.chat-markdown :deep(h4) {
+  margin: 0.65rem 0 0.25rem;
+  font-weight: 700;
+}
+
+.chat-markdown :deep(ul) {
+  margin: 0.35rem 0;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.chat-markdown :deep(li + li) {
+  margin-top: 0.2rem;
+}
+</style>

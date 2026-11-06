@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { afterEach, describe, it, expect, vi } from 'vitest'
 import * as fc from 'fast-check'
 import { useChatbot, type ChatMessage } from './useChatbot'
 
@@ -56,5 +56,30 @@ describe('Property 4: Chatbot preserves message order', () => {
       ),
       { numRuns: 100 }
     )
+  })
+})
+
+describe('chatbot API errors', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals()
+  })
+
+  it('shows a clear server error to the visitor', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue(
+        new Response(JSON.stringify({ error: 'Chat is temporarily unavailable.' }), { status: 503 })
+      )
+    )
+    const { messages, sendMessage, clearMessages } = useChatbot()
+    clearMessages()
+
+    await sendMessage('Hello')
+
+    expect(messages.value[messages.value.length - 1]).toMatchObject({
+      role: 'assistant',
+      content: 'Chat is temporarily unavailable.'
+    })
+    clearMessages()
   })
 })
